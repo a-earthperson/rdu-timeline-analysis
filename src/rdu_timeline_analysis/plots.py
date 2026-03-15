@@ -141,7 +141,14 @@ def plot_total_survival_and_cdf(
     fit_name = f"fit_lognormal_fast_{cohort_slug}.png"
 
     plt.figure(figsize=(10, 5))
-    plt.step(km_curve["t"], km_curve["survival"], where="post", color="black", linewidth=2, label="KM survival")
+    plt.step(
+        km_curve["t"],
+        km_curve["survival"],
+        where="post",
+        color="black",
+        linewidth=2,
+        label="KM survival",
+    )
     plt.plot(
         xs,
         dist_fast.sf(xs),
@@ -151,10 +158,26 @@ def plot_total_survival_and_cdf(
     )
     if mix is not None:
         s_mix = np.array([mixture_sf(mix, dist_fast, float(t)) for t in xs], dtype=float)
-        plt.plot(xs, s_mix, color="crimson", linewidth=2, label=f"USCIS-tail mixture (p_slow={mix.p_slow:.3f})")
+        plt.plot(
+            xs,
+            s_mix,
+            color="crimson",
+            linewidth=2,
+            label=f"USCIS-tail mixture (p_slow={mix.p_slow:.3f})",
+        )
     y0 = -0.02
-    plt.scatter(events, np.full_like(events, y0), marker="|", s=180, color="#1f77b4", alpha=0.85, label="events")
-    plt.scatter(cens, np.full_like(cens, y0), marker="x", s=60, color="crimson", alpha=0.9, label="censored")
+    plt.scatter(
+        events,
+        np.full_like(events, y0),
+        marker="|",
+        s=180,
+        color="#1f77b4",
+        alpha=0.85,
+        label="events",
+    )
+    plt.scatter(
+        cens, np.full_like(cens, y0), marker="x", s=60, color="crimson", alpha=0.9, label="censored"
+    )
     plt.axvline(300, color="gray", linestyle=":", linewidth=1.5)
     plt.axvline(629, color="gray", linestyle=":", linewidth=1.5)
     plt.title(f"Total time survival: receipt->I-485 approval ({cohort_title})")
@@ -168,7 +191,14 @@ def plot_total_survival_and_cdf(
     plt.close()
 
     plt.figure(figsize=(10, 5))
-    plt.step(km_curve["t"], 1.0 - km_curve["survival"], where="post", color="black", linewidth=2, label="KM CDF")
+    plt.step(
+        km_curve["t"],
+        1.0 - km_curve["survival"],
+        where="post",
+        color="black",
+        linewidth=2,
+        label="KM CDF",
+    )
     plt.plot(xs, dist_fast.cdf(xs), color="#1f77b4", linewidth=2, label="lognormal CDF")
     if mix is not None:
         f_mix = np.array([mix.f_mix(dist_fast, float(t)) for t in xs], dtype=float)
@@ -188,7 +218,15 @@ def plot_total_survival_and_cdf(
     plt.close()
 
     plt.figure(figsize=(10, 5))
-    sns.histplot(events, bins=14, stat="density", alpha=0.25, color="#1f77b4", edgecolor="white", label="closed")
+    sns.histplot(
+        events,
+        bins=14,
+        stat="density",
+        alpha=0.25,
+        color="#1f77b4",
+        edgecolor="white",
+        label="closed",
+    )
     xs2 = np.linspace(0.01, max(320.0, float(np.max(events)) + 30.0), 700)
     plt.plot(xs2, dist_fast.pdf(xs2), color="black", linewidth=2, label="lognormal PDF (fast)")
     sns.rugplot(events, color="#1f77b4", height=0.05, alpha=0.6)
@@ -226,11 +264,30 @@ def plot_interview_to_i485_survival_and_cdf(
     cdf_name = "cdf_interview_to_i485_km_lognorm.png"
 
     plt.figure(figsize=(10, 5))
-    plt.step(km_curve["t"], km_curve["survival"], where="post", color="black", linewidth=2, label="KM survival")
-    plt.plot(xs, dist.sf(xs + shift), color="#1f77b4", linewidth=2, label=f"lognormal on (t+{shift})")
+    plt.step(
+        km_curve["t"],
+        km_curve["survival"],
+        where="post",
+        color="black",
+        linewidth=2,
+        label="KM survival",
+    )
+    plt.plot(
+        xs, dist.sf(xs + shift), color="#1f77b4", linewidth=2, label=f"lognormal on (t+{shift})"
+    )
     y0 = -0.02
-    plt.scatter(events, np.full_like(events, y0), marker="|", s=180, color="#1f77b4", alpha=0.85, label="events")
-    plt.scatter(cens, np.full_like(cens, y0), marker="x", s=60, color="crimson", alpha=0.9, label="censored")
+    plt.scatter(
+        events,
+        np.full_like(events, y0),
+        marker="|",
+        s=180,
+        color="#1f77b4",
+        alpha=0.85,
+        label="events",
+    )
+    plt.scatter(
+        cens, np.full_like(cens, y0), marker="x", s=60, color="crimson", alpha=0.9, label="censored"
+    )
     plt.title("Interview->I-485 survival (KM + shifted-lognormal)")
     plt.xlabel("days since interview")
     plt.ylabel("S(t)")
@@ -242,7 +299,14 @@ def plot_interview_to_i485_survival_and_cdf(
     plt.close()
 
     plt.figure(figsize=(10, 5))
-    plt.step(km_curve["t"], 1.0 - km_curve["survival"], where="post", color="black", linewidth=2, label="KM CDF")
+    plt.step(
+        km_curve["t"],
+        1.0 - km_curve["survival"],
+        where="post",
+        color="black",
+        linewidth=2,
+        label="KM CDF",
+    )
     plt.plot(xs, dist.cdf(xs + shift), color="#1f77b4", linewidth=2, label="shifted-lognormal CDF")
     plt.title("Interview->I-485 CDF (KM + shifted-lognormal)")
     plt.xlabel("days since interview")

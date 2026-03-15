@@ -37,7 +37,9 @@ def _sha256_file(path: Path) -> str:
 
 def _git_sha() -> str:
     try:
-        out = subprocess.check_output(["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL, text=True)
+        out = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL, text=True
+        )
         return out.strip()
     except Exception:
         return "unknown"
@@ -76,7 +78,9 @@ def _copy_tree(src: Path, dst: Path) -> None:
     shutil.copytree(src, dst)
 
 
-def _pending_predictions(df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool) -> pd.DataFrame:
+def _pending_predictions(
+    df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool
+) -> pd.DataFrame:
     tte_2025 = build_tte_total_days(df_2025, today=today)
     events = tte_2025.loc[tte_2025["event"] == 1, "t"].astype(float).to_numpy()
     cens = tte_2025.loc[tte_2025["event"] == 0, "t"].astype(float).to_numpy()
@@ -84,7 +88,9 @@ def _pending_predictions(df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_t
     dist_fast = params.frozen()
     mix = None
     if use_uscis_tail:
-        mix = calibrate_tail_mixture_from_uscis(dist_fast, q80=300.0, q93=629.0, p80=0.80, p93=0.93, t_anchor=300.0)
+        mix = calibrate_tail_mixture_from_uscis(
+            dist_fast, q80=300.0, q93=629.0, p80=0.80, p93=0.93, t_anchor=300.0
+        )
 
     pending = df_2025[~df_2025["closed"] & df_2025["i-485 receipt date_dt"].notna()].copy()
     pending["t0"] = (today - pending["i-485 receipt date_dt"]).dt.days.astype(float)
@@ -102,7 +108,9 @@ def _pending_predictions(df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_t
         if mix is not None:
             out["updated_P_approve_by_300"] = mix.cond_prob_by_mix(dist_fast, t0, 300.0)
             out["updated_P_approve_by_629"] = mix.cond_prob_by_mix(dist_fast, t0, 629.0)
-            out["updated_P_slow_mode_given_pending"] = mix.posterior_p_slow_given_pending(dist_fast, t0)
+            out["updated_P_slow_mode_given_pending"] = mix.posterior_p_slow_given_pending(
+                dist_fast, t0
+            )
         rows.append(out)
     return pd.DataFrame(rows).sort_values("t0_days_since_receipt", ascending=False)
 
@@ -190,7 +198,9 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
             use_uscis_tail=config.use_uscis_tail,
         )
     )
-    plot_names.extend(plot_interview_to_i485_survival_and_cdf(df=df, today=today, output_dir=plots_dir))
+    plot_names.extend(
+        plot_interview_to_i485_survival_and_cdf(df=df, today=today, output_dir=plots_dir)
+    )
 
     pred = _pending_predictions(df_2025=df_2025, today=today, use_uscis_tail=config.use_uscis_tail)
     pred_path = tables_dir / "pending_predictions.csv"

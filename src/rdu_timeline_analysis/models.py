@@ -186,7 +186,9 @@ def ecdf(x: Sequence[float]) -> tuple[np.ndarray, np.ndarray]:
     return xs, ps
 
 
-def build_tte_total_days(df: pd.DataFrame, *, today: pd.Timestamp, user_col: str = "user") -> pd.DataFrame:
+def build_tte_total_days(
+    df: pd.DataFrame, *, today: pd.Timestamp, user_col: str = "user"
+) -> pd.DataFrame:
     rows = []
     for _, r in df.iterrows():
         user = r.get(user_col, None)

@@ -26,5 +26,11 @@ jobs:
       - name: Validate canonical data
         run: uv run python scripts/validate_data.py --csv data/canonical/rdu_timeline_data.csv
 
+      - name: Ruff check
+        run: uv run ruff check .
+
+      - name: Black check
+        run: uv run black --check .
+
       - name: Run tests
         run: uv run pytest

@@ -51,7 +51,7 @@ Outputs are written to:
   - selected model switches
   - generated outputs
 
-## Legacy files
+## Entrypoints
 
-- `rdu_timeline_methods.py` and `rdu_timeline_run_analysis.py` are retained as compatibility wrappers.
-- The package + scripts under `src/` and `scripts/` are the supported path moving forward.
+- Use `scripts/validate_data.py` for canonical dataset checks.
+- Use `scripts/run_analysis.py` for end-to-end analysis and publication artifacts.

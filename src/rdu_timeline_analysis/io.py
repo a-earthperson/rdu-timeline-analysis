@@ -64,7 +64,9 @@ def parse_num(value: object) -> float:
         return np.nan
 
 
-def load_dataset_csv(csv_path: Optional[str] = None, csv_text: Optional[str] = None) -> pd.DataFrame:
+def load_dataset_csv(
+    csv_path: Optional[str] = None, csv_text: Optional[str] = None
+) -> pd.DataFrame:
     """Load CSV from path/text and add parsed helper columns used by the pipeline."""
     if (csv_path is None) == (csv_text is None):
         raise ValueError("Provide exactly one of csv_path or csv_text.")

@@ -15,6 +15,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "black>=24.10.0",
   "pytest>=8.3.0",
   "ruff>=0.12.0",
 ]
@@ -32,6 +33,11 @@ package = true
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = ["*.ipynb"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
