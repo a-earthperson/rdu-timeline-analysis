@@ -1,4 +1,5 @@
 title: RDU Timeline Analysis
 description: Reproducible Raleigh/Durham AOS timeline analysis
+repository_url: https://github.com/a-earthperson/rdu-timeline-analysis
 theme: minima
 markdown: kramdown

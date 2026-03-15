@@ -1,4 +1,6 @@
-# Research Question and Scope
+---
+title: Research Question and Scope
+---
 
 ## Why this analysis exists
 

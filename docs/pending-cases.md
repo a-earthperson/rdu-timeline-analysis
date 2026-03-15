@@ -1,4 +1,6 @@
-# Pending Cases and Forecasts
+---
+title: Pending Cases and Forecasts
+---
 
 ## 1. Open cases are part of the analysis, not excluded from it
 

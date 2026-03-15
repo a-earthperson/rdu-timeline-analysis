@@ -1,4 +1,6 @@
-# Contributing Data
+---
+title: Contributing Data
+---
 
 ## Why additional rows matter
 

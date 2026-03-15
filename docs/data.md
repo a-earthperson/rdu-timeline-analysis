@@ -1,4 +1,6 @@
-# Data Contract
+---
+title: Data Contract
+---
 
 ## Canonical ingestion model
 

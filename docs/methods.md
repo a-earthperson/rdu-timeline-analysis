@@ -1,4 +1,6 @@
-# Methods
+---
+title: Methods
+---
 
 ## Data model and censoring
 

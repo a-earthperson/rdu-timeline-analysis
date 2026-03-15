@@ -1,4 +1,6 @@
-# Current Results
+---
+title: Current Results
+---
 
 This page is the raw artifact index for the latest published snapshot. For a reader-facing interpretation, start with [Research Question and Scope](research-question.md), [Key Findings](key-findings.md), and [Pending Cases and Forecasts](pending-cases.md).
 

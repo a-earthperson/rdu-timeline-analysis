@@ -1,4 +1,6 @@
-# RDU Timeline Analysis
+---
+title: RDU Timeline Analysis
+---
 
 This site presents the latest reproducible Raleigh/Durham AOS crowdsourced snapshot as a research-style report rather than a flat artifact index. The motivating question is narrow: given the current public sample, what appears to drive total processing time in RDU, and what should be inferred from cases that remain pending after interview?
 

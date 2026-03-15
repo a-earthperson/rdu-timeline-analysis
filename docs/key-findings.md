@@ -1,4 +1,6 @@
-# Key Findings
+---
+title: Key Findings
+---
 
 ## 1. 2025 receipt cohorts look materially faster than 2024 receipt cohorts
 

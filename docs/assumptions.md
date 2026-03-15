@@ -1,4 +1,6 @@
-# Assumptions and Caveats
+---
+title: Assumptions and Caveats
+---
 
 ## Statistical assumptions
 
