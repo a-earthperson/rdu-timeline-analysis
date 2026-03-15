@@ -1,8 +1,8 @@
 {
-  "run_timestamp_utc": "2026-03-15T21:26:25.787177+00:00",
-  "analysis_date": "2026-02-04",
-  "snapshot_tag": "2026-02-04",
-  "git_sha": "unknown",
+  "run_timestamp_utc": "2026-03-15T21:35:43.154770+00:00",
+  "analysis_date": "2026-03-15",
+  "snapshot_tag": "2026-03-15",
+  "git_sha": "75986eda875147406f3c721dcd23a5e833056026",
   "input_data_path": "data/canonical/rdu_timeline_data.csv",
   "input_data_sha256": "719c5fd6c64d09b38cb525472ce6def5319f94d2b494bff697170a7a9c2a8061",
   "office_filter": "Raleigh/Durham",
@@ -35,7 +35,7 @@
   "config": {
     "data_path": "data/canonical/rdu_timeline_data.csv",
     "office_filter": "Raleigh/Durham",
-    "today": "2026-02-04",
+    "today": null,
     "use_uscis_tail": true,
     "output_root": "results",
     "docs_root": "docs",

@@ -43,6 +43,14 @@ def _git_sha() -> str:
         return "unknown"
 
 
+def _coerce_naive_analysis_day(value: str | None) -> pd.Timestamp:
+    """Normalize analysis timestamp to a tz-naive midnight Timestamp."""
+    ts = pd.Timestamp(value) if value else pd.Timestamp.utcnow()
+    if ts.tzinfo is not None:
+        ts = ts.tz_convert(None)
+    return ts.normalize()
+
+
 @dataclass(frozen=True)
 class PipelineConfig:
     data_path: Path = Path("data/canonical/rdu_timeline_data.csv")
@@ -100,7 +108,7 @@ def _pending_predictions(df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_t
 
 
 def run_pipeline(config: PipelineConfig) -> dict[str, object]:
-    today = pd.Timestamp(config.today) if config.today else pd.Timestamp.utcnow().normalize()
+    today = _coerce_naive_analysis_day(config.today)
     snapshot_tag = config.snapshot_tag or today.strftime("%Y-%m-%d")
 
     latest_root = config.output_root / "latest"

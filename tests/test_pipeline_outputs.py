@@ -13,7 +13,7 @@ def test_pipeline_writes_manifest_and_predictions(tmp_path: Path) -> None:
         data_path=data_path,
         output_root=tmp_path / "results",
         docs_root=docs_root,
-        today="2026-02-04",
+        today="2026-02-04T00:00:00Z",
         snapshot_tag="test-snapshot",
     )
     out = run_pipeline(cfg)
