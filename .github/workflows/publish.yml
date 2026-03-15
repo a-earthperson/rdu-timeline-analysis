@@ -1,0 +1,73 @@
+name: Publish Results and Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      analysis_date:
+        description: "Optional analysis date YYYY-MM-DD"
+        required: false
+        default: ""
+  schedule:
+    - cron: "0 13 * * *"
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Sync dependencies
+        run: uv sync --all-groups
+
+      - name: Run analysis pipeline
+        run: |
+          if [ -n "${{ github.event.inputs.analysis_date }}" ]; then
+            uv run python scripts/run_analysis.py --data-path data/canonical/rdu_timeline_data.csv --today "${{ github.event.inputs.analysis_date }}"
+          else
+            uv run python scripts/run_analysis.py --data-path data/canonical/rdu_timeline_data.csv
+          fi
+
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results docs/results docs/updates.md
+          git diff --cached --quiet || git commit -m "chore: refresh published analysis artifacts"
+          git push
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

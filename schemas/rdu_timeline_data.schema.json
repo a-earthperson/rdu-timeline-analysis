@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RDU Timeline Canonical Row",
+  "type": "object",
+  "required": [
+    "user",
+    "field_office",
+    "i-485 receipt date",
+    "interview date",
+    "i-130 approval date",
+    "i-485 approval date",
+    "receipt to interview",
+    "interview to i130",
+    "interview to i485",
+    "i130 to i485",
+    "days since interview",
+    "days total",
+    "case closed"
+  ],
+  "properties": {
+    "user": { "type": "string", "minLength": 1 },
+    "field_office": { "type": "string", "minLength": 1 },
+    "i-485 receipt date": { "type": "string" },
+    "interview date": { "type": "string" },
+    "i-130 approval date": { "type": "string" },
+    "i-485 approval date": { "type": "string" },
+    "receipt to interview": { "type": "string" },
+    "interview to i130": { "type": "string" },
+    "interview to i485": { "type": "string" },
+    "i130 to i485": { "type": "string" },
+    "days since interview": { "type": "string" },
+    "days total": { "type": "string" },
+    "case closed": { "type": "string", "enum": ["YES", "NO"] }
+  },
+  "additionalProperties": true
+}
