@@ -1,7 +1,6 @@
 user,field_office,i-485 receipt date,interview date,i-130 approval date,i-485 approval date,receipt to interview,interview to i130,interview to i485,i130 to i485,days since interview,days total,case closed,days | CASE CLOSED == YES,days | CASE CLOSED == NO,days since interview | CASE CLOSED == YES,days since interview | CASE CLOSED == NO
 IcyStaff532,Raleigh/Durham,05-15-2023,07-08-2025,07-15-2025,07-26-2025,785,7,18,11,18,803,YES,803,,18,
 Frosty_Ad3742,Raleigh/Durham,04-15-2024,07-15-2025,07-16-2025,07-16-2025,456,1,1,0,1,457,YES,457,,1,
-Bright-Cellist-1551,Raleigh/Durham,06-26-2024,?,02-21-2025,02-21-2025,?,?,?,0,?,240,YES,240,,,
 Haunting_Hand_3357,Raleigh/Durham,08-30-2024,09-26-2024,?,04-04-2025,27,?,190,?,190,217,YES,217,,190,
 Fancy_Challenge768,Raleigh/Durham,09-15-2024,04-29-2025,04-30-2025,04-30-2025,226,1,1,0,1,227,YES,227,,1,
 Winter_Ad_6566,Raleigh/Durham,09-30-2024,04-29-2025,04-30-2025,05-09-2025,211,1,10,9,10,221,YES,221,,10,
@@ -29,3 +28,21 @@ _goto_throwaway_,Raleigh/Durham,10-02-2025,12-10-2025,12-11-2025,FUTURE,69,1,?,?
 Dizzy-Eye4312,Raleigh/Durham,10-10-2025,12-10-2025,12-13-2025,FUTURE,61,3,?,?,55,116,NO,,116,,55
 Rough_Procedure1815,Raleigh/Durham,12-03-2025,01-28-2026,01-30-2026,01-30-2026,56,2,2,0,2,58,YES,58,,2,
 Clear_Reading4945,Raleigh/Durham,?,11-13-2025,11-14-2025,11-14-2025,#VALUE!,1,1,0,1,#VALUE!,YES,,,1,
+Ok_Internet_7401,Raleigh/Durham,04-19-2024,05-05-2025,05-15-2025,FUTURE,381,10,?,?,314,695,NO,,695,,314
+ellaumbrlla,Raleigh/Durham,?,05-28-2025,05-30-2025,?,#VALUE!,2,?,?,291,#VALUE!,NO,,#VALUE!,,291
+MelissaJiNa,Raleigh/Durham,10-29-2024,06-03-2025,06-04-2025,06-04-2025,217,1,1,0,1,218,YES,218,,1,
+Comfortable_Pea_6522,Raleigh/Durham,01-21-2025,06-23-2025,N/A,06-24-2025,153,#VALUE!,1,#VALUE!,1,154,YES,154,,1,
+RichConfidence7466,Raleigh/Durham,04-07-2025,07-24-2025,?,07-25-2025,108,?,1,?,1,109,YES,109,,1,
+Aggie_Aggie_NC,Raleigh/Durham,02-01-2024,09-22-2025,N/A,11-01-2025,599,N/A,40,N/A,40,639,YES,639,,40,
+form_response_10,Raleigh/Durham,05-05-2025,10-15-2025,FUTURE,FUTURE,163,?,?,?,151,314,NO,,314,,151
+Frequent_Ostrich6189,Raleigh/Durham,04-23-2025,11-04-2025,FUTURE,FUTURE,195,?,?,?,131,326,NO,,326,,131
+champdogpc,Raleigh/Durham,?,11-13-2025,?,?,#VALUE!,?,?,?,122,#VALUE!,NO,,#VALUE!,,122
+Sweet_Sage18,Raleigh/Durham,08-15-2025,12-18-2025,N/A,FUTURE,125,N/A,?,N/A,87,212,NO,,212,,87
+TopicPuzzleheaded306,Raleigh/Durham,09-30-2025,12-10-2025,12-15-2025,FUTURE,71,5,?,?,95,166,NO,,166,,95
+Start_Kooky,Raleigh/Durham,11-20-2025,12-18-2025,N/A,FUTURE,28,N/A,?,N/A,87,115,NO,,115,,87
+form_response_14,Raleigh/Durham,06-10-2025,01-07-2026,02-03-2026,FUTURE,211,27,?,?,67,278,NO,,278,,67
+form_response_11,Raleigh/Durham,10-22-2025,01-15-2026,FUTURE,FUTURE,85,?,?,?,59,144,NO,,144,,59
+EfficientHeart7188,Raleigh/Durham,11-20-2025,01-22-2026,02-03-2026,FUTURE,63,12,?,?,52,115,NO,,115,,52
+Additional_Play165 - form_response_7,Raleigh/Durham,11-05-2025,01-15-2026,01-26-2026,FUTURE,71,11,?,?,59,130,NO,,130,,59
+form_response_2,Raleigh/Durham,12-01-2025,01-28-2026,01-30-2026,FUTURE,58,2,?,?,46,104,NO,,104,,46
+form_response_15,Raleigh/Durham,10-28-2025,02-19-2026,FUTURE,FUTURE,114,?,?,?,24,138,NO,,138,,24

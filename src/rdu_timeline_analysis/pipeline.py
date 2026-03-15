@@ -224,7 +224,7 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
         "input_data_sha256": _sha256_file(config.data_path),
         "office_filter": config.office_filter,
         "use_uscis_tail": config.use_uscis_tail,
-        "plot_files": sorted([p.name for p in plots_dir.glob("*.png")] + plot_names),
+        "plot_files": sorted(set([p.name for p in plots_dir.glob("*.png")] + plot_names)),
         "table_files": sorted([p.name for p in tables_dir.glob("*.csv")]),
         "config": _serialize_config(config),
     }

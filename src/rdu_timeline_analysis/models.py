@@ -148,7 +148,13 @@ def calibrate_tail_mixture_from_uscis(
     p93: float = 0.93,
     t_anchor: float = 300.0,
 ) -> TailMixtureParams:
-    """Calibrate two-regime mixture to hit external CDF anchors."""
+    """Calibrate two-regime mixture to hit external CDF anchors.
+
+    When the fitted fast distribution is already slower than the q80 anchor
+    (F_fast(q80) <= p80), the original two-regime calibration is infeasible
+    because it would require negative slow mass. In that regime, fall back to
+    ``p_slow = 0`` (fast-only curve) instead of hard-failing the pipeline.
+    """
     if abs(t_anchor - q80) > 1e-9:
         raise ValueError("Calibration assumes t_anchor == q80.")
     f_fast_80 = float(fast_dist.cdf(q80))
@@ -156,11 +162,24 @@ def calibrate_tail_mixture_from_uscis(
     if f_fast_80 <= 0:
         raise ValueError("fast_dist CDF at q80 is zero; cannot calibrate mixture.")
     if f_fast_80 <= p80:
-        raise ValueError("fast_dist already has F(q80) <= p80; would require negative p_slow.")
+        return TailMixtureParams(
+            p_slow=0.0,
+            lambda_tail=float("inf"),
+            t_anchor=float(t_anchor),
+            q80=float(q80),
+            q93=float(q93),
+        )
     p_slow = 1.0 - (p80 / f_fast_80)
     delta = float(q93 - q80)
+    if delta <= 0:
+        raise ValueError("Calibration requires q93 > q80.")
     rhs = 1.0 - (p93 - (1.0 - p_slow) * f_fast_93) / p_slow
-    lambda_tail = float("inf") if rhs <= 0 else -math.log(rhs) / delta
+    if rhs <= 0.0:
+        lambda_tail = float("inf")
+    elif rhs >= 1.0:
+        lambda_tail = 0.0
+    else:
+        lambda_tail = -math.log(rhs) / delta
     return TailMixtureParams(
         p_slow=float(p_slow),
         lambda_tail=float(lambda_tail),
