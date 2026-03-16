@@ -78,7 +78,9 @@ def _copy_tree(src: Path, dst: Path) -> None:
     shutil.copytree(src, dst)
 
 
-def _pending_predictions(df: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool) -> pd.DataFrame:
+def _pending_predictions(
+    df: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool
+) -> pd.DataFrame:
     tte = build_tte_total_days(df, today=today)
     events = tte.loc[tte["event"] == 1, "t"].astype(float).to_numpy()
     cens = tte.loc[tte["event"] == 0, "t"].astype(float).to_numpy()
