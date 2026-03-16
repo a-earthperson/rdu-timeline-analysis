@@ -2,35 +2,30 @@
 title: Key Findings
 ---
 
-## 1. 2025 receipt cohorts look materially faster than 2024 receipt cohorts
+## 1. The dominant queue is still `receipt -> interview`
 
-Among closed cases with known `receipt -> I-485 approval`, the 2025 receipt cohort has median total time 140 days (IQR 109-156, `n=17`) versus 224 days (IQR 217-255, `n=10`) for 2024 receipts. Because many recent cases are still open, the right-censored survival/CDF views are the more faithful comparison; they point in the same direction.
+Among closed cases with both timestamps known, the median share of total wait spent before interview is 98.96%. That makes the pre-interview stage the main determinant of total time in the observed sample.
 
-| Receipt year | Closed cases with known total time | Median `receipt -> I-485` | IQR |
+The all-case survival/CDF views keep the right-censored tail in frame and therefore provide the least assumption-heavy top-level picture of total processing time.
+
+![Total survival all years](results/latest/plots/survival_total_all_km_lognorm_mix.png)
+![Total CDF all years](results/latest/plots/cdf_total_all_km_lognorm_mix.png)
+
+The core structural interpretation is unchanged: most cases spend the overwhelming majority of their lifecycle waiting to reach interview, not waiting after interview.
+
+## 2. More recent interview periods, including early 2026, appear faster
+
+To avoid anchoring the story to `receipt_year`, the main temporal comparison now keys `receipt -> interview` to interview timing. That makes current office activity visible even when the underlying receipts are still from 2025.
+
+| Interview year | Cases with known `receipt -> interview` | Median `receipt -> interview` | IQR |
 | --- | ---: | ---: | --- |
-| 2024 | 10 | 224 days | 217-255 days |
-| 2025 | 17 | 140 days | 109-156 days |
+| 2025 | 36 | 154 days | 108-212 days |
+| 2026 | 7 | 71 days | 61-100 days |
 
-![Total survival 2025](results/latest/plots/survival_total_2025_km_lognorm_mix.png)
-![Total CDF 2025](results/latest/plots/cdf_total_2025_km_lognorm_mix.png)
+The 2026 group is still immature: only 1 of the 7 interviewed-in-2026 cases is closed, and 6 remain pending after interview. So the current signal should be read as an early acceleration in the pre-interview stage, not a stable estimate of full end-to-end completion time for 2026-era processing.
 
-The 2025 cohort fit keeps most probability mass well before day 300, with only a small modeled slow-tail component. In practical terms, the central part of the RDU sample is faster than the prior-year cohort even after keeping pending cases in view.
-
-## 2. The dominant queue is still `receipt -> interview`
-
-For cases with known interview timing, median `receipt -> interview` is 217 days for 2024 receipts (IQR 212-307, `n=11`) and 112 days for 2025 receipts (IQR 76-154, `n=32`). Among closed cases with both timestamps known, the median share of total wait spent before interview is 98.96%.
-
-| Receipt year | Cases with known `receipt -> interview` | Median `receipt -> interview` | IQR |
-| --- | ---: | ---: | --- |
-| 2024 | 11 | 217 days | 212-307 days |
-| 2025 | 32 | 112 days | 76-154 days |
-
-Late-2025 receipts (`2025-10` through `2025-12`) are faster again in the current sample: median `receipt -> interview` is 63 days (`n=9`, IQR 58-71). That is still a small subsample, but it is directionally important.
-
-![Receipt to interview density](results/latest/plots/density_receipt_to_interview_by_year.png)
-![Receipt to interview ECDF](results/latest/plots/ecdf_receipt_to_interview_by_year.png)
-
-This is the clearest structural result in the dataset: total processing time mostly behaves like interview scheduling time plus a comparatively smaller post-interview component.
+![Receipt to interview density by interview year](results/latest/plots/density_receipt_to_interview_by_interview_year.png)
+![Receipt to interview ECDF by interview year](results/latest/plots/ecdf_receipt_to_interview_by_interview_year.png)
 
 ## 3. After interview, approval is often near-immediate, but the long tail is real
 

@@ -8,8 +8,8 @@ As of analysis date `2026-03-15`, the filtered RDU snapshot contains 47 cases: 2
 
 At a high level, the current snapshot points to three conclusions:
 
-- 2025 receipt cohorts appear materially faster than 2024 receipt cohorts.
 - Most observed total wait is still concentrated in `receipt -> interview`.
+- More recent interview periods, including early 2026, appear faster on `receipt -> interview`, though the 2026 slice is still immature.
 - Post-interview approval is often very fast, but the remaining open tail is non-trivial and needs explicit censoring-aware interpretation.
 
 ## Recommended Reading Order

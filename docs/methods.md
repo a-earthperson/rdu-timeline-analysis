@@ -10,6 +10,8 @@ title: Methods
 - Two endpoints are modeled:
   - total time: receipt -> I-485 approval
   - interview lag: interview -> I-485 approval
+- Primary model fits use all office-filtered rows with valid timing information; they are not restricted to a fixed receipt-year cohort.
+- When the site shows temporal comparisons for `receipt -> interview`, it stratifies by interview timing so early-2026 office activity is visible even when those cases have 2025 receipt dates.
 
 ## Non-parametric baseline
 
@@ -30,4 +32,5 @@ title: Methods
 - Calibration anchors:
   - `F(300)=0.80`
   - `F(629)=0.93`
-- Conditional pending-case probabilities are computed under both baseline and updated mixture model.
+- If the fitted baseline is already slower than the day-300 anchor, the calibration falls back to `p_slow = 0` rather than forcing an infeasible negative slow mass.
+- Conditional pending-case probabilities are computed under both baseline and updated mixture model for all pending office-filtered cases with a known receipt date.

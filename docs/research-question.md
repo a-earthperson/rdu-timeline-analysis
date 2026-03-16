@@ -18,6 +18,7 @@ As of analysis date `2026-03-15`:
 - closed cases: 29
 - pending cases: 18
 - receipt years represented: 2023, 2024, 2025
+- interview years represented: 2024, 2025, 2026
 - office filter: `field_office == Raleigh/Durham`
 
 The canonical public dataset lives in `data/canonical/rdu_timeline_data.csv`; the exact filtered input used for the current site build is published at [results/latest/processed/dataset_filtered.csv](results/latest/processed/dataset_filtered.csv).
@@ -36,6 +37,8 @@ The site focuses on two time-to-event questions:
 - post-interview lag: `interview date -> I-485 approval date`
 
 Pending rows are not treated as missing. They are right-censored observations at the analysis date and therefore still contribute information about the tail of the distribution. This is why the survival/CDF views and the `pending_predictions.csv` output are central, rather than optional.
+
+The primary published models are fit on all office-filtered rows rather than a fixed receipt-year subset. Where the site needs a temporal comparison, it now keys that comparison to interview timing so early-2026 office activity remains visible even when the underlying receipt dates are still in 2025.
 
 ## Reading map
 

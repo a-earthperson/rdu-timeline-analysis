@@ -4,7 +4,7 @@ title: Contributing Data
 
 ## Why additional rows matter
 
-This project is most sensitive where the sample is thinnest: the post-interview tail, recent receipt cohorts, and slow approvals that remain open well past the common 0-14 day window. A small number of new rows can materially change the interpretation of whether RDU is speeding up, whether a given interview month looks anomalous, and how aggressive the pending-case probabilities should be.
+This project is most sensitive where the sample is thinnest: the post-interview tail, recent interview cohorts, and slow approvals that remain open well past the common 0-14 day window. A small number of new rows can materially change the interpretation of whether RDU is speeding up, whether a given interview month looks anomalous, and how aggressive the pending-case probabilities should be.
 
 ## Canonical contribution path
 

@@ -87,7 +87,9 @@ def load_dataset_csv(
     df["receipt_year"] = df["i-485 receipt date_dt"].dt.year
     df["receipt_month"] = df["i-485 receipt date_dt"].dt.to_period("M")
     df["receipt_quarter"] = df["i-485 receipt date_dt"].dt.to_period("Q")
+    df["interview_year"] = df["interview date_dt"].dt.year
     df["interview_month"] = df["interview date_dt"].dt.to_period("M")
+    df["interview_quarter"] = df["interview date_dt"].dt.to_period("Q")
     return df
 
 

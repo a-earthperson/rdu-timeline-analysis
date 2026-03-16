@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "run_timestamp_utc": "2026-03-15T23:58:51.397495+00:00",
+=======
+  "run_timestamp_utc": "2026-03-16T00:01:31.293012+00:00",
+>>>>>>> Stashed changes
   "analysis_date": "2026-03-15",
   "snapshot_tag": "2026-03-15",
   "git_sha": "a6c75ad0f50fb5ddeb57e52f6b2ad2104196fa7f",
@@ -9,16 +13,13 @@
   "use_uscis_tail": true,
   "plot_files": [
     "cdf_interview_to_i485_km_lognorm.png",
-    "cdf_total_2025_km_lognorm_mix.png",
     "cdf_total_all_km_lognorm_mix.png",
     "density_interview_to_i485.png",
-    "density_receipt_to_interview_by_year.png",
+    "density_receipt_to_interview_by_interview_year.png",
     "density_total_days.png",
-    "ecdf_receipt_to_interview_by_year.png",
-    "fit_lognormal_fast_2025.png",
+    "ecdf_receipt_to_interview_by_interview_year.png",
     "fit_lognormal_fast_all.png",
     "survival_interview_to_i485_km_lognorm.png",
-    "survival_total_2025_km_lognorm_mix.png",
     "survival_total_all_km_lognorm_mix.png"
   ],
   "table_files": [
@@ -27,7 +28,7 @@
   "config": {
     "data_path": "data/canonical/rdu_timeline_data.csv",
     "office_filter": "Raleigh/Durham",
-    "today": null,
+    "today": "2026-03-15",
     "use_uscis_tail": true,
     "output_root": "results",
     "docs_root": "docs",

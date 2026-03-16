@@ -28,18 +28,20 @@ The empirical KM curve is driven entirely by the observed sample. The optional U
 ![Total survival all years](results/latest/plots/survival_total_all_km_lognorm_mix.png)
 ![Total CDF all years](results/latest/plots/cdf_total_all_km_lognorm_mix.png)
 
-The all-years curve shows dense support in the 100-250 day region and much sparser support in the far tail. That sparse tail is exactly where small-sample overconfidence is most dangerous, so the updated mixture is best read as a conservative regularization of the long-delay regime rather than a claim that every pending case is "really" USCIS-average.
+In the current snapshot, the all-case fitted baseline is already slower than the day-300 USCIS anchor, so the mixture calibration falls back to `p_slow = 0`. Operationally, that means the "updated" total-time probabilities coincide with the baseline for this run. The USCIS-tail machinery remains useful because future snapshots can still enter the regime where an explicit slow component is needed.
 
 ## 4. How to use `pending_predictions.csv`
 
-The prediction table at [results/latest/tables/pending_predictions.csv](results/latest/tables/pending_predictions.csv) reports conditional probabilities for each pending 2025 case, including:
+The prediction table at [results/latest/tables/pending_predictions.csv](results/latest/tables/pending_predictions.csv) reports conditional probabilities for each pending case with a known receipt date across all receipt years, including:
 
+- `receipt_year`, `interview_year`, and `interview_month` for context
+- `t0_days_since_receipt` and `t0_days_since_interview` at analysis time
 - approval within 30 days from the current age
 - approval within 60 days from the current age
 - approval by day 300 from receipt
 - approval by day 629 from receipt
 - posterior probability of belonging to the modeled slow regime
 
-Read these as model-based conditional probabilities, not individual case promises. In the current snapshot, the oldest open 2025 receipt cases are already 314-326 days from receipt and still only sit around 0.78-0.80 updated probability of approval by day 629. That is the practical meaning of preserving a slow tail in the model.
+Read these as model-based conditional probabilities, not individual case promises. The important change is scope: the table is no longer restricted to a fixed 2025 receipt subset, so older pending cases and any future 2026-receipt cases are included automatically whenever their receipt dates are known. In snapshots where the USCIS-tail calibration collapses to `p_slow = 0`, the baseline and updated columns will match numerically.
 
 For fitting details and parameterization, see [Methods](methods.md) and [Assumptions and Caveats](assumptions.md).

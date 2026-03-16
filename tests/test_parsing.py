@@ -20,3 +20,5 @@ u1,Raleigh/Durham,01-01-2025,02-01-2025,02-03-2025,02-10-2025,31,2,9,7,9,40,YES
     assert "i-485 receipt date_dt" in df.columns
     assert "days total_num" in df.columns
     assert "closed" in df.columns
+    assert "interview_year" in df.columns
+    assert "interview_quarter" in df.columns

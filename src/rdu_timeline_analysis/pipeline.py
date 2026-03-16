@@ -78,12 +78,10 @@ def _copy_tree(src: Path, dst: Path) -> None:
     shutil.copytree(src, dst)
 
 
-def _pending_predictions(
-    df_2025: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool
-) -> pd.DataFrame:
-    tte_2025 = build_tte_total_days(df_2025, today=today)
-    events = tte_2025.loc[tte_2025["event"] == 1, "t"].astype(float).to_numpy()
-    cens = tte_2025.loc[tte_2025["event"] == 0, "t"].astype(float).to_numpy()
+def _pending_predictions(df: pd.DataFrame, today: pd.Timestamp, use_uscis_tail: bool) -> pd.DataFrame:
+    tte = build_tte_total_days(df, today=today)
+    events = tte.loc[tte["event"] == 1, "t"].astype(float).to_numpy()
+    cens = tte.loc[tte["event"] == 0, "t"].astype(float).to_numpy()
     params = fit_lognormal_censored_mle(events, cens)
     dist_fast = params.frozen()
     mix = None
@@ -92,14 +90,28 @@ def _pending_predictions(
             dist_fast, q80=300.0, q93=629.0, p80=0.80, p93=0.93, t_anchor=300.0
         )
 
-    pending = df_2025[~df_2025["closed"] & df_2025["i-485 receipt date_dt"].notna()].copy()
+    pending = df[~df["closed"] & df["i-485 receipt date_dt"].notna()].copy()
     pending["t0"] = (today - pending["i-485 receipt date_dt"]).dt.days.astype(float)
     rows: list[dict[str, float | str]] = []
     for _, r in pending.iterrows():
         t0 = float(r["t0"])
         out: dict[str, float | str] = {
             "user": r["user"],
+            "receipt_year": (
+                int(r["receipt_year"]) if pd.notna(r.get("receipt_year", pd.NA)) else ""
+            ),
+            "interview_year": (
+                int(r["interview_year"]) if pd.notna(r.get("interview_year", pd.NA)) else ""
+            ),
+            "interview_month": (
+                str(r["interview_month"]) if pd.notna(r.get("interview_month", pd.NA)) else ""
+            ),
             "t0_days_since_receipt": t0,
+            "t0_days_since_interview": (
+                float(r["age_days_since_interview"])
+                if pd.notna(r.get("age_days_since_interview", pd.NA))
+                else ""
+            ),
             "baseline_P_approve_within_30d": cond_prob_approve_within(dist_fast, t0, 30.0),
             "baseline_P_approve_within_60d": cond_prob_approve_within(dist_fast, t0, 60.0),
             "baseline_P_approve_by_300": cond_prob_by(dist_fast, t0, 300.0),
@@ -120,6 +132,8 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
     snapshot_tag = config.snapshot_tag or today.strftime("%Y-%m-%d")
 
     latest_root = config.output_root / "latest"
+    if latest_root.exists():
+        shutil.rmtree(latest_root)
     plots_dir = latest_root / "plots"
     tables_dir = latest_root / "tables"
     processed_dir = latest_root / "processed"
@@ -140,19 +154,19 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
     density_plot_with_rug(
         df=df,
         value_col="receipt to interview_num",
-        hue_col="receipt_year",
-        title="Receipt -> Interview (days) by receipt year (RDU sample)",
+        hue_col="interview_year",
+        title="Receipt -> Interview (days) by interview year (RDU sample)",
         xlabel="days from I-485 receipt to interview",
-        outpath=plots_dir / "density_receipt_to_interview_by_year.png",
+        outpath=plots_dir / "density_receipt_to_interview_by_interview_year.png",
         xlim=(0, max(260, float(df["receipt to interview_num"].dropna().max()) + 10)),
     )
     plot_ecdf_overlay(
-        df=df.dropna(subset=["receipt to interview_num", "receipt_year"]),
+        df=df.dropna(subset=["receipt to interview_num", "interview_year"]),
         value_col="receipt to interview_num",
-        group_col="receipt_year",
-        title="ECDF: Receipt -> Interview (days) by receipt year",
+        group_col="interview_year",
+        title="ECDF: Receipt -> Interview (days) by interview year",
         xlabel="days from I-485 receipt to interview",
-        outpath=plots_dir / "ecdf_receipt_to_interview_by_year.png",
+        outpath=plots_dir / "ecdf_receipt_to_interview_by_interview_year.png",
         xlim=(0, max(260, float(df["receipt to interview_num"].dropna().max()) + 10)),
     )
     density_plot_with_rug(
@@ -176,24 +190,13 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
         xlim=(0, max(320, float(df["days total_num"].dropna().max()) + 10)),
     )
 
-    df_2025 = df[df["receipt_year"] == 2025].copy()
     plot_names = []
-    plot_names.extend(
-        plot_total_survival_and_cdf(
-            df=df_2025,
-            today=today,
-            cohort_slug="2025",
-            cohort_title="2025 receipt cohort",
-            output_dir=plots_dir,
-            use_uscis_tail=config.use_uscis_tail,
-        )
-    )
     plot_names.extend(
         plot_total_survival_and_cdf(
             df=df,
             today=today,
             cohort_slug="all",
-            cohort_title="all receipt years",
+            cohort_title="all office-filtered cases",
             output_dir=plots_dir,
             use_uscis_tail=config.use_uscis_tail,
         )
@@ -202,7 +205,7 @@ def run_pipeline(config: PipelineConfig) -> dict[str, object]:
         plot_interview_to_i485_survival_and_cdf(df=df, today=today, output_dir=plots_dir)
     )
 
-    pred = _pending_predictions(df_2025=df_2025, today=today, use_uscis_tail=config.use_uscis_tail)
+    pred = _pending_predictions(df=df, today=today, use_uscis_tail=config.use_uscis_tail)
     pred_path = tables_dir / "pending_predictions.csv"
     pred.to_csv(pred_path, index=False)
 

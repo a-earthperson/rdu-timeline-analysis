@@ -8,8 +8,6 @@ Artifacts on this page are served from `docs/results/latest/` and are regenerate
 
 ## Total Time (Receipt -> I-485)
 
-![Total survival 2025](results/latest/plots/survival_total_2025_km_lognorm_mix.png)
-![Total CDF 2025](results/latest/plots/cdf_total_2025_km_lognorm_mix.png)
 ![Total survival all years](results/latest/plots/survival_total_all_km_lognorm_mix.png)
 ![Total CDF all years](results/latest/plots/cdf_total_all_km_lognorm_mix.png)
 
@@ -20,15 +18,14 @@ Artifacts on this page are served from `docs/results/latest/` and are regenerate
 
 ## Descriptive Plots
 
-![Receipt to interview density](results/latest/plots/density_receipt_to_interview_by_year.png)
-![Receipt to interview ECDF](results/latest/plots/ecdf_receipt_to_interview_by_year.png)
+![Receipt to interview density by interview year](results/latest/plots/density_receipt_to_interview_by_interview_year.png)
+![Receipt to interview ECDF by interview year](results/latest/plots/ecdf_receipt_to_interview_by_interview_year.png)
 ![Interview to i485 density](results/latest/plots/density_interview_to_i485.png)
 ![Total days density](results/latest/plots/density_total_days.png)
 
 ## Fit Diagnostics
 
 ![Baseline fit all years](results/latest/plots/fit_lognormal_fast_all.png)
-![Baseline fit 2025](results/latest/plots/fit_lognormal_fast_2025.png)
 
 ## Data Exports
 
@@ -38,3 +35,5 @@ Artifacts on this page are served from `docs/results/latest/` and are regenerate
 ## Pending Predictions
 
 CSV: [results/latest/tables/pending_predictions.csv](results/latest/tables/pending_predictions.csv)
+
+The pending prediction table covers all pending office-filtered cases with a known receipt date, rather than a fixed receipt-year subset.
