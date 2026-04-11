@@ -31,3 +31,4 @@ Snapshot updates are appended by the pipeline.
 - 2026-04-08: snapshot `2026-04-08`, [manifest](results/latest/manifest.json), [predictions](results/latest/tables/pending_predictions.csv)
 - 2026-04-09: snapshot `2026-04-09`, [manifest](results/latest/manifest.json), [predictions](results/latest/tables/pending_predictions.csv)
 - 2026-04-10: snapshot `2026-04-10`, [manifest](results/latest/manifest.json), [predictions](results/latest/tables/pending_predictions.csv)
+- 2026-04-11: snapshot `2026-04-11`, [manifest](results/latest/manifest.json), [predictions](results/latest/tables/pending_predictions.csv)
