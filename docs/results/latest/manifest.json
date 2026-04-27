@@ -1,8 +1,8 @@
 {
-  "run_timestamp_utc": "2026-04-26T14:06:43.235320+00:00",
-  "analysis_date": "2026-04-26",
-  "snapshot_tag": "2026-04-26",
-  "git_sha": "87d22eede93b0fd159d49699091f1773dc7be7fd",
+  "run_timestamp_utc": "2026-04-27T15:10:56.749174+00:00",
+  "analysis_date": "2026-04-27",
+  "snapshot_tag": "2026-04-27",
+  "git_sha": "fd83bd1e5905b67445e0db4687fc68176443a904",
   "input_data_path": "data/canonical/rdu_timeline_data.csv",
   "input_data_sha256": "d44119693321e3e87285377affd1dc27a88b0bd01cd26bd5ade6ccd0f49bcb0c",
   "office_filter": "Raleigh/Durham",
