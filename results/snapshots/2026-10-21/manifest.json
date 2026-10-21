@@ -1,0 +1,33 @@
+{
+  "run_timestamp_utc": "2026-10-21T17:57:26.521201+00:00",
+  "analysis_date": "2026-10-21",
+  "snapshot_tag": "2026-10-21",
+  "git_sha": "1f34b8c762465c94e42ff18f6854139593a88f5a",
+  "input_data_path": "data/canonical/rdu_timeline_data.csv",
+  "input_data_sha256": "d44119693321e3e87285377affd1dc27a88b0bd01cd26bd5ade6ccd0f49bcb0c",
+  "office_filter": "Raleigh/Durham",
+  "use_uscis_tail": true,
+  "plot_files": [
+    "cdf_interview_to_i485_km_lognorm.png",
+    "cdf_total_all_km_lognorm_mix.png",
+    "density_interview_to_i485.png",
+    "density_receipt_to_interview_by_interview_year.png",
+    "density_total_days.png",
+    "ecdf_receipt_to_interview_by_interview_year.png",
+    "fit_lognormal_fast_all.png",
+    "survival_interview_to_i485_km_lognorm.png",
+    "survival_total_all_km_lognorm_mix.png"
+  ],
+  "table_files": [
+    "pending_predictions.csv"
+  ],
+  "config": {
+    "data_path": "data/canonical/rdu_timeline_data.csv",
+    "office_filter": "Raleigh/Durham",
+    "today": null,
+    "use_uscis_tail": true,
+    "output_root": "results",
+    "docs_root": "docs",
+    "snapshot_tag": null
+  }
+}
